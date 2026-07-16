@@ -247,6 +247,16 @@ function App() {
   const [imageAiLoading, setImageAiLoading] = useState(false);
   const [imageAiError, setImageAiError] = useState("");
   const [recognizedText, setRecognizedText] = useState("");
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
+  const [chatError, setChatError] = useState("");
+  const [chatMessages, setChatMessages] = useState([
+    {
+      role: "assistant",
+      content: "こんにちは。学習で迷っていることを教えてください。答えをそのまま渡すのではなく、考えるためのヒントを出します。"
+    }
+  ]);
 
   const request = (path, options = {}) =>
     fetch(`${API_URL}${path}`, {
@@ -783,6 +793,44 @@ function App() {
       setCheckError("AI評価を作成できませんでした。");
     } finally {
       setCheckLoading("");
+    }
+  };
+
+  const sendStudyChatMessage = async (event) => {
+    event.preventDefault();
+    const message = chatInput.trim();
+
+    if (!message || chatLoading) {
+      return;
+    }
+
+    const nextMessages = [...chatMessages, { role: "user", content: message }];
+    setChatMessages(nextMessages);
+    setChatInput("");
+    setChatError("");
+    setChatLoading(true);
+
+    try {
+      const response = await request("/study-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message,
+          history: nextMessages.slice(-8)
+        })
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        setChatError(data.message || "AI学習チャットの回答を作成できませんでした。");
+        return;
+      }
+
+      setChatMessages((current) => [...current, { role: "assistant", content: data.reply || "もう少し具体的に質問してみましょう。" }]);
+    } catch (error) {
+      setChatError("AI学習チャットに接続できませんでした。");
+    } finally {
+      setChatLoading(false);
     }
   };
 
@@ -1408,6 +1456,54 @@ function App() {
             </section>
           </>
         )}
+      </section>
+
+      <section className={`studyChatWidget ${chatOpen ? "open" : ""}`} aria-label="AI学習チャット">
+        {chatOpen && (
+          <div className="studyChatPanel">
+            <div className="studyChatHeader">
+              <div>
+                <strong>AI学習チャット</strong>
+                <span>ヒントで学習をサポート</span>
+              </div>
+              <button className="closeButton" type="button" aria-label="AI学習チャットを閉じる" onClick={() => setChatOpen(false)}>
+                ×
+              </button>
+            </div>
+            <div className="studyChatMessages">
+              {chatMessages.map((message, index) => (
+                <div className={`studyChatBubble ${message.role}`} key={`${message.role}-${index}`}>
+                  {message.content}
+                </div>
+              ))}
+              {chatLoading && <div className="studyChatBubble assistant">ヒントを考えています...</div>}
+            </div>
+            {chatError && <p className="studyChatError">{chatError}</p>}
+            <form className="studyChatForm" onSubmit={sendStudyChatMessage}>
+              <textarea
+                value={chatInput}
+                onChange={(event) => setChatInput(event.target.value)}
+                placeholder="質問や困っていることを書く..."
+                rows="2"
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    sendStudyChatMessage(event);
+                  }
+                }}
+              />
+              <button type="submit" disabled={chatLoading || !chatInput.trim()}>送信</button>
+            </form>
+          </div>
+        )}
+        <button
+          className="studyChatToggle"
+          type="button"
+          aria-label={chatOpen ? "AI学習チャットを閉じる" : "AI学習チャットを開く"}
+          onClick={() => setChatOpen((current) => !current)}
+        >
+          <AppIcon name={chatOpen ? "check" : "spark"} />
+        </button>
       </section>
 
     </main>

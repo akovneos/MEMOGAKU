@@ -424,6 +424,52 @@ JSONではなく、本文だけ返してください。
   }
 };
 
+const makeStudyChatReply = async ({ message, history, notes }) => {
+  const safeMessage = String(message || "").trim();
+  const safeHistory = Array.isArray(history) ? history.slice(-8) : [];
+  const noteContext = notes.slice(0, 8).map((note, index) => {
+    const normalized = normalizeNote(note);
+    return `${index + 1}. ${normalized.title} / ${normalized.subject} / ${normalized.understanding}
+内容: ${normalized.content.slice(0, 240)}
+メモ: ${(normalized.memo || "なし").slice(0, 160)}`;
+  }).join("\n\n");
+
+  const chatHistory = safeHistory.map((item) => {
+    const role = item.role === "assistant" ? "AI" : "ユーザー";
+    return `${role}: ${String(item.content || "").slice(0, 500)}`;
+  }).join("\n");
+
+  const prompt = `
+あなたは学習メモAI管理アプリの学習コーチです。
+ユーザーの質問に日本語で答えてください。
+
+重要なルール:
+- 直接的な答えや完成済みの解答をそのまま渡さないでください。
+- 代わりに、考え方、ヒント、確認すべき観点、次に試す一歩を示してください。
+- ユーザーが答えを求めても、まず自分で考えられるように誘導してください。
+- 文章は短めで、初心者にもわかりやすくしてください。
+- 必要なら「まずここを確認しましょう」のように、質問を1つ返してください。
+- 学習メモの内容に関係がある場合は、その内容を参考にしてください。
+
+最近の会話:
+${chatHistory || "なし"}
+
+ユーザーの学習メモ:
+${noteContext || "まだ学習メモはありません。"}
+
+今回の質問:
+${safeMessage}
+`;
+
+  const text = await getGeminiText(prompt);
+
+  if (!text) {
+    return "まず、今わかっていることを1つだけ書き出してみましょう。その上で「どこから分からなくなったか」を確認すると、次のヒントが見つかりやすいです。";
+  }
+
+  return text.trim();
+};
+
 const imageDataUrlToBuffer = (imageDataUrl) => {
   const match = imageDataUrl.match(/^data:image\/[a-zA-Z0-9.+-]+;base64,(.+)$/);
 
@@ -880,6 +926,29 @@ app.get("/api/daily-advice", requireAuth, async (req, res) => {
     content: result.rows[0].content,
     createdAt: result.rows[0].created_at
   });
+});
+
+app.post("/api/study-chat", requireAuth, async (req, res) => {
+  const message = String(req.body?.message || "").trim();
+  const history = Array.isArray(req.body?.history) ? req.body.history : [];
+
+  if (!message) {
+    return res.status(400).json({ message: "質問を入力してください。" });
+  }
+
+  try {
+    const result = await query(
+      "SELECT * FROM notes WHERE user_id = $1 ORDER BY created_at DESC, id DESC LIMIT 12",
+      [req.user.id]
+    );
+    const reply = await makeStudyChatReply({ message, history, notes: result.rows.map(mapNote) });
+    res.json({ reply });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: "AI学習チャットの回答を作成できませんでした。",
+      detail: error.message
+    });
+  }
 });
 
 app.post("/api/notes/extract-image", requireAuth, async (req, res) => {
