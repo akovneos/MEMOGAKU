@@ -1,0 +1,452 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.16.0
+2 info using node@v24.18.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend\.npmrc
+5 silly config load:file:C:\Users\kensyu003\.npmrc
+6 silly config load:file:C:\Users\kensyu003\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install pg dotenv
+8 verbose argv "install" "pg" "dotenv" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend\.npm-cache\_logs\2026-07-14T05_51_12_277Z-
+10 verbose logfile C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend\.npm-cache\_logs\2026-07-14T05_51_12_277Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+13 silly idealTree buildDeps
+14 silly fetch manifest tesseract.js@^7.0.0
+15 silly packumentCache full:https://registry.npmjs.org/tesseract.js cache-miss
+16 verbose shrinkwrap failed to load node_modules/.package-lock.json missing from lockfile: node_modules/bmp-js
+17 http fetch GET 200 https://registry.npmjs.org/tesseract.js 174ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/tesseract.js set size:undefined disposed:false
+19 silly fetch manifest pg@*
+20 silly packumentCache full:https://registry.npmjs.org/pg cache-miss
+21 http fetch GET 200 https://registry.npmjs.org/pg 46ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/pg set size:undefined disposed:false
+23 silly fetch manifest pg-native@>=3.0.1
+24 silly packumentCache full:https://registry.npmjs.org/pg-native cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/pg-native 38ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/pg-native set size:undefined disposed:false
+27 silly fetch manifest dotenv@*
+28 silly packumentCache full:https://registry.npmjs.org/dotenv cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/dotenv 45ms (cache miss)
+30 silly packumentCache full:https://registry.npmjs.org/dotenv set size:undefined disposed:false
+31 silly placeDep ROOT dotenv@17.4.2 OK for: learning-memo-ai-backend@1.0.0 want: *
+32 silly placeDep ROOT pg@8.22.0 OK for: learning-memo-ai-backend@1.0.0 want: *
+33 silly placeDep ROOT tesseract.js@7.0.0 OK for: learning-memo-ai-backend@1.0.0 want: ^7.0.0
+34 silly fetch manifest pgpass@1.0.5
+35 silly packumentCache full:https://registry.npmjs.org/pgpass cache-miss
+36 silly fetch manifest pg-pool@^3.14.0
+37 silly packumentCache full:https://registry.npmjs.org/pg-pool cache-miss
+38 silly fetch manifest pg-types@2.2.0
+39 silly packumentCache full:https://registry.npmjs.org/pg-types cache-miss
+40 silly fetch manifest pg-protocol@^1.15.0
+41 silly packumentCache full:https://registry.npmjs.org/pg-protocol cache-miss
+42 silly fetch manifest pg-connection-string@^2.14.0
+43 silly packumentCache full:https://registry.npmjs.org/pg-connection-string cache-miss
+44 silly fetch manifest pg-cloudflare@^1.4.0
+45 silly packumentCache full:https://registry.npmjs.org/pg-cloudflare cache-miss
+46 silly fetch manifest bmp-js@^0.1.0
+47 silly packumentCache full:https://registry.npmjs.org/bmp-js cache-miss
+48 http fetch GET 200 https://registry.npmjs.org/pgpass 71ms (cache miss)
+49 silly packumentCache full:https://registry.npmjs.org/pgpass set size:undefined disposed:false
+50 silly fetch manifest idb-keyval@^6.2.0
+51 silly packumentCache full:https://registry.npmjs.org/idb-keyval cache-miss
+52 http fetch GET 200 https://registry.npmjs.org/bmp-js 126ms (cache miss)
+53 silly packumentCache full:https://registry.npmjs.org/bmp-js set size:undefined disposed:false
+54 silly fetch manifest is-url@^1.2.4
+55 silly packumentCache full:https://registry.npmjs.org/is-url cache-miss
+56 http fetch GET 200 https://registry.npmjs.org/pg-cloudflare 207ms (cache miss)
+57 silly packumentCache full:https://registry.npmjs.org/pg-cloudflare set size:undefined disposed:false
+58 silly fetch manifest node-fetch@^2.6.9
+59 silly packumentCache full:https://registry.npmjs.org/node-fetch cache-miss
+60 http fetch GET 200 https://registry.npmjs.org/pg-connection-string 214ms (cache miss)
+61 silly packumentCache full:https://registry.npmjs.org/pg-connection-string set size:undefined disposed:false
+62 silly fetch manifest opencollective-postinstall@^2.0.3
+63 silly packumentCache full:https://registry.npmjs.org/opencollective-postinstall cache-miss
+64 http fetch GET 200 https://registry.npmjs.org/pg-types 272ms (cache miss)
+65 silly packumentCache full:https://registry.npmjs.org/pg-types set size:undefined disposed:false
+66 silly fetch manifest regenerator-runtime@^0.13.3
+67 silly packumentCache full:https://registry.npmjs.org/regenerator-runtime cache-miss
+68 http fetch GET 200 https://registry.npmjs.org/idb-keyval 212ms (cache miss)
+69 silly packumentCache full:https://registry.npmjs.org/idb-keyval set size:undefined disposed:false
+70 silly fetch manifest tesseract.js-core@^7.0.0
+71 silly packumentCache full:https://registry.npmjs.org/tesseract.js-core cache-miss
+72 http fetch GET 200 https://registry.npmjs.org/pg-protocol 317ms (cache miss)
+73 silly packumentCache full:https://registry.npmjs.org/pg-protocol set size:undefined disposed:false
+74 silly fetch manifest wasm-feature-detect@^1.8.0
+75 silly packumentCache full:https://registry.npmjs.org/wasm-feature-detect cache-miss
+76 http fetch GET 200 https://registry.npmjs.org/pg-pool 335ms (cache miss)
+77 silly packumentCache full:https://registry.npmjs.org/pg-pool set size:undefined disposed:false
+78 silly fetch manifest zlibjs@^0.3.1
+79 silly packumentCache full:https://registry.npmjs.org/zlibjs cache-miss
+80 http fetch GET 200 https://registry.npmjs.org/is-url 230ms (cache miss)
+81 silly packumentCache full:https://registry.npmjs.org/is-url set size:undefined disposed:false
+82 http fetch GET 200 https://registry.npmjs.org/opencollective-postinstall 165ms (cache miss)
+83 silly packumentCache full:https://registry.npmjs.org/opencollective-postinstall set size:undefined disposed:false
+84 http fetch GET 200 https://registry.npmjs.org/regenerator-runtime 119ms (cache miss)
+85 silly packumentCache full:https://registry.npmjs.org/regenerator-runtime set size:undefined disposed:false
+86 http fetch GET 200 https://registry.npmjs.org/tesseract.js-core 112ms (cache miss)
+87 silly packumentCache full:https://registry.npmjs.org/tesseract.js-core set size:undefined disposed:false
+88 http fetch GET 200 https://registry.npmjs.org/zlibjs 66ms (cache miss)
+89 silly packumentCache full:https://registry.npmjs.org/zlibjs set size:undefined disposed:false
+90 http fetch GET 200 https://registry.npmjs.org/node-fetch 218ms (cache miss)
+91 silly packumentCache full:https://registry.npmjs.org/node-fetch set size:undefined disposed:false
+92 http fetch GET 200 https://registry.npmjs.org/wasm-feature-detect 138ms (cache miss)
+93 silly packumentCache full:https://registry.npmjs.org/wasm-feature-detect set size:undefined disposed:false
+94 silly fetch manifest pg@>=8.0
+95 silly packumentCache full:https://registry.npmjs.org/pg cache-miss
+96 http cache https://registry.npmjs.org/pg 16ms (cache hit)
+97 silly packumentCache full:https://registry.npmjs.org/pg set size:479959 disposed:false
+98 silly placeDep ROOT pg-cloudflare@1.4.0 OK for: pg@8.22.0 want: ^1.4.0
+99 silly placeDep ROOT pg-connection-string@2.14.0 OK for: pg@8.22.0 want: ^2.14.0
+100 silly placeDep ROOT pg-pool@3.14.0 OK for: pg@8.22.0 want: ^3.14.0
+101 silly placeDep ROOT pg-protocol@1.15.0 OK for: pg@8.22.0 want: ^1.15.0
+102 silly placeDep ROOT pg-types@2.2.0 OK for: pg@8.22.0 want: 2.2.0
+103 silly placeDep ROOT pgpass@1.0.5 OK for: pg@8.22.0 want: 1.0.5
+104 silly fetch manifest pg-int8@1.0.1
+105 silly packumentCache full:https://registry.npmjs.org/pg-int8 cache-miss
+106 silly fetch manifest postgres-date@~1.0.4
+107 silly packumentCache full:https://registry.npmjs.org/postgres-date cache-miss
+108 silly fetch manifest postgres-array@~2.0.0
+109 silly packumentCache full:https://registry.npmjs.org/postgres-array cache-miss
+110 silly fetch manifest postgres-bytea@~1.0.0
+111 silly packumentCache full:https://registry.npmjs.org/postgres-bytea cache-miss
+112 silly fetch manifest postgres-interval@^1.1.0
+113 silly packumentCache full:https://registry.npmjs.org/postgres-interval cache-miss
+114 silly fetch manifest split2@^4.1.0
+115 silly packumentCache full:https://registry.npmjs.org/split2 cache-miss
+116 http fetch GET 200 https://registry.npmjs.org/split2 60ms (cache miss)
+117 silly packumentCache full:https://registry.npmjs.org/split2 set size:undefined disposed:false
+118 http fetch GET 200 https://registry.npmjs.org/pg-int8 65ms (cache miss)
+119 silly packumentCache full:https://registry.npmjs.org/pg-int8 set size:undefined disposed:false
+120 http fetch GET 200 https://registry.npmjs.org/postgres-date 66ms (cache miss)
+121 silly packumentCache full:https://registry.npmjs.org/postgres-date set size:undefined disposed:false
+122 http fetch GET 200 https://registry.npmjs.org/postgres-bytea 67ms (cache miss)
+123 silly packumentCache full:https://registry.npmjs.org/postgres-bytea set size:undefined disposed:false
+124 http fetch GET 200 https://registry.npmjs.org/postgres-interval 69ms (cache miss)
+125 silly packumentCache full:https://registry.npmjs.org/postgres-interval set size:undefined disposed:false
+126 http fetch GET 200 https://registry.npmjs.org/postgres-array 71ms (cache miss)
+127 silly packumentCache full:https://registry.npmjs.org/postgres-array set size:undefined disposed:false
+128 silly placeDep ROOT pg-int8@1.0.1 OK for: pg-types@2.2.0 want: 1.0.1
+129 silly placeDep ROOT postgres-array@2.0.0 OK for: pg-types@2.2.0 want: ~2.0.0
+130 silly placeDep ROOT postgres-bytea@1.0.1 OK for: pg-types@2.2.0 want: ~1.0.0
+131 silly placeDep ROOT postgres-date@1.0.7 OK for: pg-types@2.2.0 want: ~1.0.4
+132 silly placeDep ROOT postgres-interval@1.2.0 OK for: pg-types@2.2.0 want: ^1.1.0
+133 silly fetch manifest xtend@^4.0.0
+134 silly packumentCache full:https://registry.npmjs.org/xtend cache-miss
+135 http fetch GET 200 https://registry.npmjs.org/xtend 30ms (cache miss)
+136 silly packumentCache full:https://registry.npmjs.org/xtend set size:undefined disposed:false
+137 silly placeDep ROOT split2@4.2.0 OK for: pgpass@1.0.5 want: ^4.1.0
+138 silly placeDep ROOT xtend@4.0.2 OK for: postgres-interval@1.2.0 want: ^4.0.0
+139 silly fetch manifest encoding@^0.1.0
+140 silly packumentCache full:https://registry.npmjs.org/encoding cache-miss
+141 http fetch GET 200 https://registry.npmjs.org/encoding 34ms (cache miss)
+142 silly packumentCache full:https://registry.npmjs.org/encoding set size:undefined disposed:false
+143 silly placeDep ROOT bmp-js@0.1.0 OK for: tesseract.js@7.0.0 want: ^0.1.0
+144 silly placeDep ROOT idb-keyval@6.3.0 OK for: tesseract.js@7.0.0 want: ^6.2.0
+145 silly placeDep ROOT is-url@1.2.4 OK for: tesseract.js@7.0.0 want: ^1.2.4
+146 silly placeDep ROOT node-fetch@2.7.0 OK for: tesseract.js@7.0.0 want: ^2.6.9
+147 silly placeDep ROOT opencollective-postinstall@2.0.3 OK for: tesseract.js@7.0.0 want: ^2.0.3
+148 silly placeDep ROOT regenerator-runtime@0.13.11 OK for: tesseract.js@7.0.0 want: ^0.13.3
+149 silly placeDep ROOT tesseract.js-core@7.0.0 OK for: tesseract.js@7.0.0 want: ^7.0.0
+150 silly placeDep ROOT wasm-feature-detect@1.8.0 OK for: tesseract.js@7.0.0 want: ^1.8.0
+151 silly placeDep ROOT zlibjs@0.3.1 OK for: tesseract.js@7.0.0 want: ^0.3.1
+152 silly fetch manifest whatwg-url@^5.0.0
+153 silly packumentCache full:https://registry.npmjs.org/whatwg-url cache-miss
+154 http fetch GET 200 https://registry.npmjs.org/whatwg-url 32ms (cache miss)
+155 silly packumentCache full:https://registry.npmjs.org/whatwg-url set size:undefined disposed:false
+156 silly placeDep ROOT whatwg-url@5.0.0 OK for: node-fetch@2.7.0 want: ^5.0.0
+157 silly fetch manifest tr46@~0.0.3
+158 silly packumentCache full:https://registry.npmjs.org/tr46 cache-miss
+159 silly fetch manifest webidl-conversions@^3.0.0
+160 silly packumentCache full:https://registry.npmjs.org/webidl-conversions cache-miss
+161 http fetch GET 200 https://registry.npmjs.org/tr46 28ms (cache miss)
+162 silly packumentCache full:https://registry.npmjs.org/tr46 set size:undefined disposed:false
+163 http fetch GET 200 https://registry.npmjs.org/webidl-conversions 34ms (cache miss)
+164 silly packumentCache full:https://registry.npmjs.org/webidl-conversions set size:undefined disposed:false
+165 silly placeDep ROOT tr46@0.0.3 OK for: whatwg-url@5.0.0 want: ~0.0.3
+166 silly placeDep ROOT webidl-conversions@3.0.1 OK for: whatwg-url@5.0.0 want: ^3.0.0
+167 silly reify mark retired [
+167 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\bmp-js'
+167 silly reify ]
+168 silly reify mark retired [
+168 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\idb-keyval'
+168 silly reify ]
+169 silly reify mark retired [
+169 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\is-url'
+169 silly reify ]
+170 silly reify mark retired [
+170 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\node-fetch'
+170 silly reify ]
+171 silly reify mark retired [
+171 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\opencollective-postinstall',
+171 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\opencollective-postinstall',
+171 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\opencollective-postinstall.cmd',
+171 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\opencollective-postinstall.ps1'
+171 silly reify ]
+172 silly reify mark retired [
+172 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\regenerator-runtime'
+172 silly reify ]
+173 silly reify mark retired [
+173 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\tesseract.js'
+173 silly reify ]
+174 silly reify mark retired [
+174 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\tesseract.js-core'
+174 silly reify ]
+175 silly reify mark retired [
+175 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\tr46'
+175 silly reify ]
+176 silly reify mark retired [
+176 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\wasm-feature-detect'
+176 silly reify ]
+177 silly reify mark retired [
+177 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\webidl-conversions'
+177 silly reify ]
+178 silly reify mark retired [
+178 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\whatwg-url'
+178 silly reify ]
+179 silly reify mark retired [
+179 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\zlibjs'
+179 silly reify ]
+180 silly reify moves {
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\bmp-js': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bmp-js-0bHC8gjV',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\idb-keyval': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.idb-keyval-MoVt9Tok',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\is-url': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.is-url-9rLgurzg',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\node-fetch': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.node-fetch-DcDroIGr',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\opencollective-postinstall': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.opencollective-postinstall-xJfkFPhk',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\opencollective-postinstall': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\.opencollective-postinstall-mLJnqlSo',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\opencollective-postinstall.cmd': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\.opencollective-postinstall.cmd-x2sVMxvz',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\opencollective-postinstall.ps1': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.bin\\.opencollective-postinstall.ps1-jfoFht2C',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\regenerator-runtime': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.regenerator-runtime-wq2iikVd',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\tesseract.js': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.tesseract.js-ZMEOC0HC',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\tesseract.js-core': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.tesseract.js-core-Qe5GspP4',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\tr46': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.tr46-Q9COH8v4',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\wasm-feature-detect': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.wasm-feature-detect-XrN7QwA5',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\webidl-conversions': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.webidl-conversions-ez0uy34z',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\whatwg-url': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.whatwg-url-6QRU0u2g',
+180 silly reify   'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\zlibjs': 'C:\\Users\\kensyu003\\Documents\\Codex\\2026-07-09\\ai-1-2-3-ai-react-2\\backend\\node_modules\\.zlibjs-374tASGy'
+180 silly reify }
+181 silly audit bulk request {
+181 silly audit   accepts: [ '1.3.8' ],
+181 silly audit   'array-flatten': [ '1.1.1' ],
+181 silly audit   'body-parser': [ '1.20.6' ],
+181 silly audit   bytes: [ '3.1.2' ],
+181 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+181 silly audit   'call-bound': [ '1.0.4' ],
+181 silly audit   'content-disposition': [ '0.5.4' ],
+181 silly audit   'content-type': [ '1.0.5' ],
+181 silly audit   cookie: [ '0.7.2' ],
+181 silly audit   'cookie-signature': [ '1.0.7' ],
+181 silly audit   cors: [ '2.8.6' ],
+181 silly audit   debug: [ '2.6.9' ],
+181 silly audit   depd: [ '2.0.0' ],
+181 silly audit   destroy: [ '1.2.0' ],
+181 silly audit   'dunder-proto': [ '1.0.1' ],
+181 silly audit   'ee-first': [ '1.1.1' ],
+181 silly audit   encodeurl: [ '2.0.0' ],
+181 silly audit   'es-define-property': [ '1.0.1' ],
+181 silly audit   'es-errors': [ '1.3.0' ],
+181 silly audit   'es-object-atoms': [ '1.1.2' ],
+181 silly audit   'escape-html': [ '1.0.3' ],
+181 silly audit   etag: [ '1.8.1' ],
+181 silly audit   express: [ '4.22.2' ],
+181 silly audit   finalhandler: [ '1.3.2' ],
+181 silly audit   forwarded: [ '0.2.0' ],
+181 silly audit   fresh: [ '0.5.2' ],
+181 silly audit   'function-bind': [ '1.1.2' ],
+181 silly audit   'get-intrinsic': [ '1.3.0' ],
+181 silly audit   'get-proto': [ '1.0.1' ],
+181 silly audit   gopd: [ '1.2.0' ],
+181 silly audit   'has-symbols': [ '1.1.0' ],
+181 silly audit   hasown: [ '2.0.4' ],
+181 silly audit   'http-errors': [ '2.0.1' ],
+181 silly audit   'iconv-lite': [ '0.4.24' ],
+181 silly audit   inherits: [ '2.0.4' ],
+181 silly audit   'ipaddr.js': [ '1.9.1' ],
+181 silly audit   'math-intrinsics': [ '1.1.0' ],
+181 silly audit   'media-typer': [ '0.3.0' ],
+181 silly audit   'merge-descriptors': [ '1.0.3' ],
+181 silly audit   methods: [ '1.1.2' ],
+181 silly audit   mime: [ '1.6.0' ],
+181 silly audit   'mime-db': [ '1.52.0' ],
+181 silly audit   'mime-types': [ '2.1.35' ],
+181 silly audit   ms: [ '2.0.0', '2.1.3' ],
+181 silly audit   negotiator: [ '0.6.3' ],
+181 silly audit   'object-assign': [ '4.1.1' ],
+181 silly audit   'object-inspect': [ '1.13.4' ],
+181 silly audit   'on-finished': [ '2.4.1' ],
+181 silly audit   parseurl: [ '1.3.3' ],
+181 silly audit   'path-to-regexp': [ '0.1.13' ],
+181 silly audit   'proxy-addr': [ '2.0.7' ],
+181 silly audit   qs: [ '6.15.3' ],
+181 silly audit   'range-parser': [ '1.2.1' ],
+181 silly audit   'raw-body': [ '2.5.3' ],
+181 silly audit   'safe-buffer': [ '5.2.1' ],
+181 silly audit   'safer-buffer': [ '2.1.2' ],
+181 silly audit   send: [ '0.19.2' ],
+181 silly audit   'serve-static': [ '1.16.3' ],
+181 silly audit   setprototypeof: [ '1.2.0' ],
+181 silly audit   'side-channel': [ '1.1.1' ],
+181 silly audit   'side-channel-list': [ '1.0.1' ],
+181 silly audit   'side-channel-map': [ '1.0.1' ],
+181 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+181 silly audit   statuses: [ '2.0.2' ],
+181 silly audit   toidentifier: [ '1.0.1' ],
+181 silly audit   'type-is': [ '1.6.18' ],
+181 silly audit   unpipe: [ '1.0.0' ],
+181 silly audit   'utils-merge': [ '1.0.1' ],
+181 silly audit   vary: [ '1.1.2' ],
+181 silly audit   dotenv: [ '17.4.2' ],
+181 silly audit   pg: [ '8.22.0' ],
+181 silly audit   'tesseract.js': [ '7.0.0' ],
+181 silly audit   'pg-cloudflare': [ '1.4.0' ],
+181 silly audit   'pg-connection-string': [ '2.14.0' ],
+181 silly audit   'pg-pool': [ '3.14.0' ],
+181 silly audit   'pg-protocol': [ '1.15.0' ],
+181 silly audit   'pg-types': [ '2.2.0' ],
+181 silly audit   pgpass: [ '1.0.5' ],
+181 silly audit   'pg-int8': [ '1.0.1' ],
+181 silly audit   'postgres-array': [ '2.0.0' ],
+181 silly audit   'postgres-bytea': [ '1.0.1' ],
+181 silly audit   'postgres-date': [ '1.0.7' ],
+181 silly audit   'postgres-interval': [ '1.2.0' ],
+181 silly audit   split2: [ '4.2.0' ],
+181 silly audit   xtend: [ '4.0.2' ],
+181 silly audit   'bmp-js': [ '0.1.0' ],
+181 silly audit   'idb-keyval': [ '6.3.0' ],
+181 silly audit   'is-url': [ '1.2.4' ],
+181 silly audit   'node-fetch': [ '2.7.0' ],
+181 silly audit   'opencollective-postinstall': [ '2.0.3' ],
+181 silly audit   'regenerator-runtime': [ '0.13.11' ],
+181 silly audit   'tesseract.js-core': [ '7.0.0' ],
+181 silly audit   'wasm-feature-detect': [ '1.8.0' ],
+181 silly audit   zlibjs: [ '0.3.1' ],
+181 silly audit   'whatwg-url': [ '5.0.0' ],
+181 silly audit   tr46: [ '0.0.3' ],
+181 silly audit   'webidl-conversions': [ '3.0.1' ]
+181 silly audit }
+182 http cache xtend@https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz 0ms (cache hit)
+183 http cache postgres-date@https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.7.tgz 0ms (cache hit)
+184 http cache postgres-interval@https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.2.0.tgz 0ms (cache hit)
+185 http cache split2@https://registry.npmjs.org/split2/-/split2-4.2.0.tgz 0ms (cache hit)
+186 http cache postgres-bytea@https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.1.tgz 0ms (cache hit)
+187 http cache pg-int8@https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz 0ms (cache hit)
+188 http cache pgpass@https://registry.npmjs.org/pgpass/-/pgpass-1.0.5.tgz 0ms (cache hit)
+189 http cache pg-protocol@https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.15.0.tgz 0ms (cache hit)
+190 http cache pg-types@https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz 0ms (cache hit)
+191 http cache pg-pool@https://registry.npmjs.org/pg-pool/-/pg-pool-3.14.0.tgz 0ms (cache hit)
+192 http cache pg-cloudflare@https://registry.npmjs.org/pg-cloudflare/-/pg-cloudflare-1.4.0.tgz 0ms (cache hit)
+193 http cache pg-connection-string@https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-2.14.0.tgz 0ms (cache hit)
+194 http cache pg@https://registry.npmjs.org/pg/-/pg-8.22.0.tgz 0ms (cache hit)
+195 http cache postgres-array@https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz 0ms (cache hit)
+196 http cache dotenv@https://registry.npmjs.org/dotenv/-/dotenv-17.4.2.tgz 0ms (cache hit)
+197 http cache zlibjs@https://registry.npmjs.org/zlibjs/-/zlibjs-0.3.1.tgz 0ms (cache hit)
+198 http cache whatwg-url@https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz 0ms (cache hit)
+199 http cache webidl-conversions@https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz 0ms (cache hit)
+200 http cache wasm-feature-detect@https://registry.npmjs.org/wasm-feature-detect/-/wasm-feature-detect-1.8.0.tgz 0ms (cache hit)
+201 http cache tr46@https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz 0ms (cache hit)
+202 http cache tesseract.js-core@https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-7.0.0.tgz 1ms (cache hit)
+203 http cache regenerator-runtime@https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz 0ms (cache hit)
+204 http cache node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz 0ms (cache hit)
+205 http cache opencollective-postinstall@https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz 0ms (cache hit)
+206 http cache is-url@https://registry.npmjs.org/is-url/-/is-url-1.2.4.tgz 0ms (cache hit)
+207 http cache idb-keyval@https://registry.npmjs.org/idb-keyval/-/idb-keyval-6.3.0.tgz 0ms (cache hit)
+208 http cache bmp-js@https://registry.npmjs.org/bmp-js/-/bmp-js-0.1.0.tgz 0ms (cache hit)
+209 http cache tesseract.js@https://registry.npmjs.org/tesseract.js/-/tesseract.js-7.0.0.tgz 0ms (cache hit)
+210 silly tarball no local data for xtend@https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz. Extracting by manifest.
+211 silly tarball no local data for postgres-date@https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.7.tgz. Extracting by manifest.
+212 silly tarball no local data for postgres-interval@https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.2.0.tgz. Extracting by manifest.
+213 silly tarball no local data for split2@https://registry.npmjs.org/split2/-/split2-4.2.0.tgz. Extracting by manifest.
+214 silly tarball no local data for postgres-bytea@https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.1.tgz. Extracting by manifest.
+215 silly tarball no local data for pg-int8@https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz. Extracting by manifest.
+216 silly tarball no local data for pgpass@https://registry.npmjs.org/pgpass/-/pgpass-1.0.5.tgz. Extracting by manifest.
+217 silly tarball no local data for pg-protocol@https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.15.0.tgz. Extracting by manifest.
+218 silly tarball no local data for pg-types@https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz. Extracting by manifest.
+219 silly tarball no local data for pg-pool@https://registry.npmjs.org/pg-pool/-/pg-pool-3.14.0.tgz. Extracting by manifest.
+220 silly tarball no local data for pg-cloudflare@https://registry.npmjs.org/pg-cloudflare/-/pg-cloudflare-1.4.0.tgz. Extracting by manifest.
+221 silly tarball no local data for pg-connection-string@https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-2.14.0.tgz. Extracting by manifest.
+222 silly tarball no local data for pg@https://registry.npmjs.org/pg/-/pg-8.22.0.tgz. Extracting by manifest.
+223 silly tarball no local data for postgres-array@https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz. Extracting by manifest.
+224 silly tarball no local data for dotenv@https://registry.npmjs.org/dotenv/-/dotenv-17.4.2.tgz. Extracting by manifest.
+225 silly tarball no local data for zlibjs@https://registry.npmjs.org/zlibjs/-/zlibjs-0.3.1.tgz. Extracting by manifest.
+226 silly tarball no local data for whatwg-url@https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz. Extracting by manifest.
+227 silly tarball no local data for webidl-conversions@https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz. Extracting by manifest.
+228 silly tarball no local data for wasm-feature-detect@https://registry.npmjs.org/wasm-feature-detect/-/wasm-feature-detect-1.8.0.tgz. Extracting by manifest.
+229 silly tarball no local data for tr46@https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz. Extracting by manifest.
+230 silly tarball no local data for tesseract.js-core@https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-7.0.0.tgz. Extracting by manifest.
+231 silly tarball no local data for regenerator-runtime@https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz. Extracting by manifest.
+232 silly tarball no local data for node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz. Extracting by manifest.
+233 silly tarball no local data for opencollective-postinstall@https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz. Extracting by manifest.
+234 silly tarball no local data for is-url@https://registry.npmjs.org/is-url/-/is-url-1.2.4.tgz. Extracting by manifest.
+235 silly tarball no local data for idb-keyval@https://registry.npmjs.org/idb-keyval/-/idb-keyval-6.3.0.tgz. Extracting by manifest.
+236 silly tarball no local data for bmp-js@https://registry.npmjs.org/bmp-js/-/bmp-js-0.1.0.tgz. Extracting by manifest.
+237 silly tarball no local data for tesseract.js@https://registry.npmjs.org/tesseract.js/-/tesseract.js-7.0.0.tgz. Extracting by manifest.
+238 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 345ms
+239 silly audit report {}
+240 http fetch GET 200 https://registry.npmjs.org/postgres-bytea/-/postgres-bytea-1.0.1.tgz 484ms (cache miss)
+241 http fetch GET 200 https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz 504ms (cache miss)
+242 http fetch GET 200 https://registry.npmjs.org/postgres-interval/-/postgres-interval-1.2.0.tgz 505ms (cache miss)
+243 http fetch GET 200 https://registry.npmjs.org/postgres-date/-/postgres-date-1.0.7.tgz 514ms (cache miss)
+244 http fetch GET 200 https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz 487ms (cache miss)
+245 http fetch GET 200 https://registry.npmjs.org/pg-int8/-/pg-int8-1.0.1.tgz 518ms (cache miss)
+246 http fetch GET 200 https://registry.npmjs.org/split2/-/split2-4.2.0.tgz 528ms (cache miss)
+247 http fetch GET 200 https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz 513ms (cache miss)
+248 http fetch GET 200 https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz 518ms (cache miss)
+249 http fetch GET 200 https://registry.npmjs.org/is-url/-/is-url-1.2.4.tgz 516ms (cache miss)
+250 http fetch GET 200 https://registry.npmjs.org/pgpass/-/pgpass-1.0.5.tgz 554ms (cache miss)
+251 http fetch GET 200 https://registry.npmjs.org/postgres-array/-/postgres-array-2.0.0.tgz 554ms (cache miss)
+252 http fetch GET 200 https://registry.npmjs.org/pg-connection-string/-/pg-connection-string-2.14.0.tgz 584ms (cache miss)
+253 http fetch GET 200 https://registry.npmjs.org/pg-pool/-/pg-pool-3.14.0.tgz 619ms (cache miss)
+254 http fetch GET 200 https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz 619ms (cache miss)
+255 http fetch GET 200 https://registry.npmjs.org/wasm-feature-detect/-/wasm-feature-detect-1.8.0.tgz 646ms (cache miss)
+256 http fetch GET 200 https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz 677ms (cache miss)
+257 http fetch GET 200 https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz 686ms (cache miss)
+258 http fetch GET 200 https://registry.npmjs.org/idb-keyval/-/idb-keyval-6.3.0.tgz 713ms (cache miss)
+259 http fetch GET 200 https://registry.npmjs.org/dotenv/-/dotenv-17.4.2.tgz 733ms (cache miss)
+260 http fetch GET 200 https://registry.npmjs.org/pg-cloudflare/-/pg-cloudflare-1.4.0.tgz 740ms (cache miss)
+261 http fetch GET 200 https://registry.npmjs.org/pg-types/-/pg-types-2.2.0.tgz 748ms (cache miss)
+262 http fetch GET 200 https://registry.npmjs.org/pg/-/pg-8.22.0.tgz 896ms (cache miss)
+263 http fetch GET 200 https://registry.npmjs.org/bmp-js/-/bmp-js-0.1.0.tgz 1063ms (cache miss)
+264 http fetch GET 200 https://registry.npmjs.org/pg-protocol/-/pg-protocol-1.15.0.tgz 1127ms (cache miss)
+265 http fetch GET 200 https://registry.npmjs.org/zlibjs/-/zlibjs-0.3.1.tgz 1333ms (cache miss)
+266 http fetch GET 200 https://registry.npmjs.org/tesseract.js/-/tesseract.js-7.0.0.tgz 1497ms (cache miss)
+267 http fetch GET 200 https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-7.0.0.tgz 2027ms (cache miss)
+268 info run tesseract.js@7.0.0 postinstall node_modules/tesseract.js opencollective-postinstall || true
+269 info run tesseract.js@7.0.0 postinstall { code: 0, signal: null }
+270 silly ADD node_modules/xtend
+271 silly ADD node_modules/split2
+272 silly ADD node_modules/postgres-interval
+273 silly ADD node_modules/postgres-date
+274 silly ADD node_modules/postgres-bytea
+275 silly ADD node_modules/postgres-array
+276 silly ADD node_modules/pg-int8
+277 silly ADD node_modules/pgpass
+278 silly ADD node_modules/pg-types
+279 silly ADD node_modules/pg-protocol
+280 silly ADD node_modules/pg-pool
+281 silly ADD node_modules/pg-connection-string
+282 silly ADD node_modules/pg-cloudflare
+283 silly ADD node_modules/pg
+284 silly ADD node_modules/dotenv
+285 silly CHANGE node_modules/zlibjs
+286 silly CHANGE node_modules/whatwg-url
+287 silly CHANGE node_modules/webidl-conversions
+288 silly CHANGE node_modules/wasm-feature-detect
+289 silly CHANGE node_modules/tr46
+290 silly CHANGE node_modules/tesseract.js-core
+291 silly CHANGE node_modules/tesseract.js
+292 silly CHANGE node_modules/regenerator-runtime
+293 silly CHANGE node_modules/opencollective-postinstall
+294 silly CHANGE node_modules/node-fetch
+295 silly CHANGE node_modules/is-url
+296 silly CHANGE node_modules/idb-keyval
+297 silly CHANGE node_modules/bmp-js
+298 warn allow-scripts 1 package has install scripts not yet covered by allowScripts:
+298 warn allow-scripts   tesseract.js@7.0.0 (postinstall: opencollective-postinstall || true)
+298 warn allow-scripts
+298 warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+299 verbose cwd C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend
+300 verbose os Windows_NT 10.0.26200
+301 verbose node v24.18.0
+302 verbose npm  v11.16.0
+303 verbose exit 0
+304 info ok

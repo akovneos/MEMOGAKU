@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+*.env
+backend/.env
+frontend/.env
+
+.pnpm-store/
+_backup_meishi_ai_app_20260714/

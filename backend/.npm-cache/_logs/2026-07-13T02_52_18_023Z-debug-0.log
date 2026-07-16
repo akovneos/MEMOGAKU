@@ -1,0 +1,160 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.16.0
+2 info using node@v24.18.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend\.npmrc
+5 silly config load:file:C:\Users\kensyu003\.npmrc
+6 silly config load:file:C:\Users\kensyu003\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--ignore-scripts" "--cache" ".npm-cache"
+9 verbose logfile logs-max:10 dir:C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend\.npm-cache\_logs\2026-07-13T02_52_18_023Z-
+10 verbose logfile C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend\.npm-cache\_logs\2026-07-13T02_52_18_023Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2348810240 maxSize:587202560 maxEntrySize:293601280
+13 silly idealTree buildDeps
+14 verbose shrinkwrap failed to load node_modules/.package-lock.json missing from node_modules: node_modules/bmp-js
+15 silly reify moves {}
+16 silly audit bulk request {
+16 silly audit   accepts: [ '1.3.8' ],
+16 silly audit   'array-flatten': [ '1.1.1' ],
+16 silly audit   'bmp-js': [ '0.1.0' ],
+16 silly audit   'body-parser': [ '1.20.6' ],
+16 silly audit   bytes: [ '3.1.2' ],
+16 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+16 silly audit   'call-bound': [ '1.0.4' ],
+16 silly audit   'content-disposition': [ '0.5.4' ],
+16 silly audit   'content-type': [ '1.0.5' ],
+16 silly audit   cookie: [ '0.7.2' ],
+16 silly audit   'cookie-signature': [ '1.0.7' ],
+16 silly audit   cors: [ '2.8.6' ],
+16 silly audit   debug: [ '2.6.9' ],
+16 silly audit   depd: [ '2.0.0' ],
+16 silly audit   destroy: [ '1.2.0' ],
+16 silly audit   'dunder-proto': [ '1.0.1' ],
+16 silly audit   'ee-first': [ '1.1.1' ],
+16 silly audit   encodeurl: [ '2.0.0' ],
+16 silly audit   'es-define-property': [ '1.0.1' ],
+16 silly audit   'es-errors': [ '1.3.0' ],
+16 silly audit   'es-object-atoms': [ '1.1.2' ],
+16 silly audit   'escape-html': [ '1.0.3' ],
+16 silly audit   etag: [ '1.8.1' ],
+16 silly audit   express: [ '4.22.2' ],
+16 silly audit   finalhandler: [ '1.3.2' ],
+16 silly audit   forwarded: [ '0.2.0' ],
+16 silly audit   fresh: [ '0.5.2' ],
+16 silly audit   'function-bind': [ '1.1.2' ],
+16 silly audit   'get-intrinsic': [ '1.3.0' ],
+16 silly audit   'get-proto': [ '1.0.1' ],
+16 silly audit   gopd: [ '1.2.0' ],
+16 silly audit   'has-symbols': [ '1.1.0' ],
+16 silly audit   hasown: [ '2.0.4' ],
+16 silly audit   'http-errors': [ '2.0.1' ],
+16 silly audit   'iconv-lite': [ '0.4.24' ],
+16 silly audit   'idb-keyval': [ '6.3.0' ],
+16 silly audit   inherits: [ '2.0.4' ],
+16 silly audit   'ipaddr.js': [ '1.9.1' ],
+16 silly audit   'is-url': [ '1.2.4' ],
+16 silly audit   'math-intrinsics': [ '1.1.0' ],
+16 silly audit   'media-typer': [ '0.3.0' ],
+16 silly audit   'merge-descriptors': [ '1.0.3' ],
+16 silly audit   methods: [ '1.1.2' ],
+16 silly audit   mime: [ '1.6.0' ],
+16 silly audit   'mime-db': [ '1.52.0' ],
+16 silly audit   'mime-types': [ '2.1.35' ],
+16 silly audit   ms: [ '2.0.0', '2.1.3' ],
+16 silly audit   negotiator: [ '0.6.3' ],
+16 silly audit   'node-fetch': [ '2.7.0' ],
+16 silly audit   'object-assign': [ '4.1.1' ],
+16 silly audit   'object-inspect': [ '1.13.4' ],
+16 silly audit   'on-finished': [ '2.4.1' ],
+16 silly audit   'opencollective-postinstall': [ '2.0.3' ],
+16 silly audit   parseurl: [ '1.3.3' ],
+16 silly audit   'path-to-regexp': [ '0.1.13' ],
+16 silly audit   'proxy-addr': [ '2.0.7' ],
+16 silly audit   qs: [ '6.15.3' ],
+16 silly audit   'range-parser': [ '1.2.1' ],
+16 silly audit   'raw-body': [ '2.5.3' ],
+16 silly audit   'regenerator-runtime': [ '0.13.11' ],
+16 silly audit   'safe-buffer': [ '5.2.1' ],
+16 silly audit   'safer-buffer': [ '2.1.2' ],
+16 silly audit   send: [ '0.19.2' ],
+16 silly audit   'serve-static': [ '1.16.3' ],
+16 silly audit   setprototypeof: [ '1.2.0' ],
+16 silly audit   'side-channel': [ '1.1.1' ],
+16 silly audit   'side-channel-list': [ '1.0.1' ],
+16 silly audit   'side-channel-map': [ '1.0.1' ],
+16 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+16 silly audit   statuses: [ '2.0.2' ],
+16 silly audit   'tesseract.js': [ '7.0.0' ],
+16 silly audit   'tesseract.js-core': [ '7.0.0' ],
+16 silly audit   toidentifier: [ '1.0.1' ],
+16 silly audit   tr46: [ '0.0.3' ],
+16 silly audit   'type-is': [ '1.6.18' ],
+16 silly audit   unpipe: [ '1.0.0' ],
+16 silly audit   'utils-merge': [ '1.0.1' ],
+16 silly audit   vary: [ '1.1.2' ],
+16 silly audit   'wasm-feature-detect': [ '1.8.0' ],
+16 silly audit   'webidl-conversions': [ '3.0.1' ],
+16 silly audit   'whatwg-url': [ '5.0.0' ],
+16 silly audit   zlibjs: [ '0.3.1' ]
+16 silly audit }
+17 http cache zlibjs@https://registry.npmjs.org/zlibjs/-/zlibjs-0.3.1.tgz 0ms (cache hit)
+18 http cache whatwg-url@https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz 0ms (cache hit)
+19 http cache webidl-conversions@https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz 0ms (cache hit)
+20 http cache wasm-feature-detect@https://registry.npmjs.org/wasm-feature-detect/-/wasm-feature-detect-1.8.0.tgz 0ms (cache hit)
+21 http cache tesseract.js-core@https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-7.0.0.tgz 0ms (cache hit)
+22 http cache tr46@https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz 0ms (cache hit)
+23 http cache tesseract.js@https://registry.npmjs.org/tesseract.js/-/tesseract.js-7.0.0.tgz 0ms (cache hit)
+24 http cache regenerator-runtime@https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz 0ms (cache hit)
+25 http cache opencollective-postinstall@https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz 0ms (cache hit)
+26 http cache is-url@https://registry.npmjs.org/is-url/-/is-url-1.2.4.tgz 0ms (cache hit)
+27 http cache idb-keyval@https://registry.npmjs.org/idb-keyval/-/idb-keyval-6.3.0.tgz 0ms (cache hit)
+28 http cache node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz 0ms (cache hit)
+29 http cache bmp-js@https://registry.npmjs.org/bmp-js/-/bmp-js-0.1.0.tgz 0ms (cache hit)
+30 silly tarball no local data for zlibjs@https://registry.npmjs.org/zlibjs/-/zlibjs-0.3.1.tgz. Extracting by manifest.
+31 silly tarball no local data for whatwg-url@https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz. Extracting by manifest.
+32 silly tarball no local data for webidl-conversions@https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz. Extracting by manifest.
+33 silly tarball no local data for wasm-feature-detect@https://registry.npmjs.org/wasm-feature-detect/-/wasm-feature-detect-1.8.0.tgz. Extracting by manifest.
+34 silly tarball no local data for tesseract.js-core@https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-7.0.0.tgz. Extracting by manifest.
+35 silly tarball no local data for tr46@https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz. Extracting by manifest.
+36 silly tarball no local data for tesseract.js@https://registry.npmjs.org/tesseract.js/-/tesseract.js-7.0.0.tgz. Extracting by manifest.
+37 silly tarball no local data for regenerator-runtime@https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz. Extracting by manifest.
+38 silly tarball no local data for opencollective-postinstall@https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz. Extracting by manifest.
+39 silly tarball no local data for is-url@https://registry.npmjs.org/is-url/-/is-url-1.2.4.tgz. Extracting by manifest.
+40 silly tarball no local data for idb-keyval@https://registry.npmjs.org/idb-keyval/-/idb-keyval-6.3.0.tgz. Extracting by manifest.
+41 silly tarball no local data for node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz. Extracting by manifest.
+42 silly tarball no local data for bmp-js@https://registry.npmjs.org/bmp-js/-/bmp-js-0.1.0.tgz. Extracting by manifest.
+43 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 315ms
+44 silly audit report {}
+45 http fetch GET 200 https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz 321ms (cache miss)
+46 http fetch GET 200 https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz 321ms (cache miss)
+47 http fetch GET 200 https://registry.npmjs.org/is-url/-/is-url-1.2.4.tgz 343ms (cache miss)
+48 http fetch GET 200 https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz 347ms (cache miss)
+49 http fetch GET 200 https://registry.npmjs.org/wasm-feature-detect/-/wasm-feature-detect-1.8.0.tgz 401ms (cache miss)
+50 http fetch GET 200 https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz 415ms (cache miss)
+51 http fetch GET 200 https://registry.npmjs.org/idb-keyval/-/idb-keyval-6.3.0.tgz 442ms (cache miss)
+52 http fetch GET 200 https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz 481ms (cache miss)
+53 http fetch GET 200 https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz 484ms (cache miss)
+54 http fetch GET 200 https://registry.npmjs.org/bmp-js/-/bmp-js-0.1.0.tgz 691ms (cache miss)
+55 http fetch GET 200 https://registry.npmjs.org/zlibjs/-/zlibjs-0.3.1.tgz 1008ms (cache miss)
+56 http fetch GET 200 https://registry.npmjs.org/tesseract.js/-/tesseract.js-7.0.0.tgz 1232ms (cache miss)
+57 http fetch GET 200 https://registry.npmjs.org/tesseract.js-core/-/tesseract.js-core-7.0.0.tgz 1688ms (cache miss)
+58 silly ADD node_modules/zlibjs
+59 silly ADD node_modules/whatwg-url
+60 silly ADD node_modules/webidl-conversions
+61 silly ADD node_modules/wasm-feature-detect
+62 silly ADD node_modules/tr46
+63 silly ADD node_modules/tesseract.js-core
+64 silly ADD node_modules/tesseract.js
+65 silly ADD node_modules/regenerator-runtime
+66 silly ADD node_modules/opencollective-postinstall
+67 silly ADD node_modules/node-fetch
+68 silly ADD node_modules/is-url
+69 silly ADD node_modules/idb-keyval
+70 silly ADD node_modules/bmp-js
+71 verbose cwd C:\Users\kensyu003\Documents\Codex\2026-07-09\ai-1-2-3-ai-react-2\backend
+72 verbose os Windows_NT 10.0.26200
+73 verbose node v24.18.0
+74 verbose npm  v11.16.0
+75 verbose exit 0
+76 info ok

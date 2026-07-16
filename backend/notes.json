@@ -1,0 +1,196 @@
+[
+  {
+    "id": 1783997946222,
+    "userId": 1783907351554,
+    "title": "2432кфыф",
+    "subject": "ыфвыфв",
+    "content": "фывыфв",
+    "studyDate": "",
+    "understanding": "普通",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783997940142,
+    "userId": 1783907351554,
+    "title": "3224й",
+    "subject": "вфывф",
+    "content": "фывфвфыа",
+    "studyDate": "",
+    "understanding": "普通",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783997929383,
+    "userId": 1783907351554,
+    "title": "фыафвыв34",
+    "subject": "ывыфа",
+    "content": "ыфафы",
+    "studyDate": "",
+    "understanding": "よく理解した",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "",
+    "aiSummary": "фыафвыв34は「ывыфа」についての学習メモです。重要な内容は「ыфафы」です。復習するときは、内容を自分の言葉で説明できるか確認しましょう。",
+    "reviewQuestions": [
+      "Q1. фыафвыв34の目的や意味は何ですか？",
+      "Q2. ывыфаの中で、今回いちばん重要なポイントは何ですか？",
+      "Q3. 学習した内容を使う例を1つ説明してください。"
+    ]
+  },
+  {
+    "id": 1783997921406,
+    "userId": 1783907351554,
+    "title": "фывфыафа",
+    "subject": "фыафыа",
+    "content": "ыфафыафы",
+    "studyDate": "",
+    "understanding": "普通",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "фыафафа",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783997913725,
+    "userId": 1783907351554,
+    "title": "Вывфыа",
+    "subject": "ыфафыа",
+    "content": "ыафаывпвыпы",
+    "studyDate": "",
+    "understanding": "普通",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783997907364,
+    "userId": 1783907351554,
+    "title": "Выв",
+    "subject": "фавф",
+    "content": "вфыфавыа",
+    "studyDate": "",
+    "understanding": "まだ難しい",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783997901962,
+    "userId": 1783907351554,
+    "title": "ыфвфы",
+    "subject": "ывф",
+    "content": "ывфар",
+    "studyDate": "",
+    "understanding": "普通",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783997897047,
+    "userId": 1783907351554,
+    "title": "ыфвфыа",
+    "subject": "выаывв",
+    "content": "ывфа",
+    "studyDate": "",
+    "understanding": "よく理解した",
+    "reviewDate": "",
+    "tags": [],
+    "memo": "",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783996713589,
+    "userId": 1783907351554,
+    "title": "ReactのuseStateについて",
+    "subject": "React",
+    "content": "useStateは、Reactの関数コンポーネントで状態を管理するためのHookです。\n\n例えば、ボタンを押した回数を保存する場合は、次のように記述します。\n\nconst [count, setCount] = useState(0);\n\ncountには現在の値が入り、setCountを使って値を更新します。状態が更新されると、Reactはコンポーネントを再レンダリングし、画面の表示も変更されます。",
+    "studyDate": "2026-07-14",
+    "understanding": "普通",
+    "reviewDate": "2026-07-21",
+    "tags": [
+      "React",
+      "Hooks",
+      "useState"
+    ],
+    "memo": "stateを直接変更しない。\n必ずsetState関数を使って更新する。\n状態が変わるとコンポーネントが再描画される。\n配列やオブジェクトを更新するときはスプレッド構文を使うことが多い",
+    "aiSummary": "ReactのuseStateについては「React」についての学習メモです。重要な内容は「useStateは、Reactの関数コンポーネントで状態を管理するためのHookです」です。復習するときは、内容を自分の言葉で説明できるか確認しましょう。",
+    "reviewQuestions": [
+      "Q1. ReactのuseStateについての目的や意味は何ですか？",
+      "Q2. Reactの中で、今回いちばん重要なポイントは何ですか？",
+      "Q3. 学習した内容を使う例を1つ説明してください。"
+    ]
+  },
+  {
+    "id": 1783993974803,
+    "userId": 1783907351554,
+    "title": "ям",
+    "subject": "яч",
+    "content": "авпа",
+    "studyDate": "2026-07-14",
+    "understanding": "まだ難しい",
+    "reviewDate": "2026-07-16",
+    "tags": [
+      "яч"
+    ],
+    "memo": "ячс",
+    "aiSummary": "",
+    "reviewQuestions": []
+  },
+  {
+    "id": 1783993933634,
+    "userId": 1783907351554,
+    "title": "ыпывп",
+    "subject": "выа",
+    "content": "выа",
+    "studyDate": "",
+    "understanding": "普通",
+    "reviewDate": "2026-07-13",
+    "tags": [
+      "выа"
+    ],
+    "memo": "ва",
+    "aiSummary": "ыпывпは「выа」についての学習メモです。重要な内容は「выа」です。復習するときは、内容を自分の言葉で説明できるか確認しましょう。",
+    "reviewQuestions": [
+      "Q1. ыпывпの目的や意味は何ですか？",
+      "Q2. выаの中で、今回いちばん重要なポイントは何ですか？",
+      "Q3. 学習した内容を使う例を1つ説明してください。"
+    ]
+  },
+  {
+    "id": 1783992629469,
+    "userId": 1783907351554,
+    "title": "233",
+    "subject": "23",
+    "content": "2312",
+    "studyDate": "2026-07-16",
+    "understanding": "普通",
+    "reviewDate": "2026-07-25",
+    "tags": [
+      "231"
+    ],
+    "memo": "132",
+    "aiSummary": "233は「23」についての学習メモです。重要な内容は「2312」です。復習するときは、内容を自分の言葉で説明できるか確認しましょう。",
+    "reviewQuestions": [
+      "Q1. 233の目的や意味は何ですか？",
+      "Q2. 23の中で、今回いちばん重要なポイントは何ですか？",
+      "Q3. 学習した内容を使う例を1つ説明してください。"
+    ]
+  }
+]

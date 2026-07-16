@@ -1,0 +1,10 @@
+PORT=3001
+AUTH_SECRET=change-this-secret
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=learning_memo_ai
+DB_USER=postgres
+DB_PASSWORD=your_postgres_password
+
+TESSERACT_LANG=jpn+eng

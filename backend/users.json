@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1783907351554,
+    "username": "neos",
+    "email": "a.kov.neos@gmail.com",
+    "passwordHash": {
+      "salt": "7fff2f59eff54450ea218c3b570cdd1e",
+      "hash": "db9677078f40caa018ae5423c038776d7a78d482f7cf1b4f54f6fd848356bc5b02c628daaf59903aca8e4c912482360dc6eaf5cea4170d010507daa9e7875e4c"
+    },
+    "companyName": "",
+    "industry": "",
+    "note": ""
+  },
+  {
+    "id": 1783910923279,
+    "username": "ocr-test",
+    "email": "ocr-test-ade44ed06a724f778201b93546517d2a@example.com",
+    "passwordHash": {
+      "salt": "551f0af71ed9a6d7d10d50a5aa0459ea",
+      "hash": "0222e415bec9de763dec8794e35e916f7ee4f2d29de90bce6eafb03463d1bcb7ff54d1b78181224d15bb72552ff6bcd9e7c0de323d7db8cbecb0b3f3e27dd803"
+    },
+    "companyName": "",
+    "industry": "",
+    "note": ""
+  },
+  {
+    "id": 1783910950514,
+    "username": "ocr-test",
+    "email": "ocr-test-15a2cd0933814ffba846f0905c62d3c4@example.com",
+    "passwordHash": {
+      "salt": "a1b24ef9aafb5a168c9497356840264f",
+      "hash": "9caa6b609dcd4908ef32c8464d5872c891cf005cc8dd50d339ee05fb552981c6980746818b90e168fd7caf88b8b02e3a778b0463574138b9540c1cb5e73a4d00"
+    },
+    "companyName": "",
+    "industry": "",
+    "note": ""
+  },
+  {
+    "id": 1783911045405,
+    "username": "ocr-test",
+    "email": "ocr-test-b0e60a958a6d401fafa4b4b8e09b6cc3@example.com",
+    "passwordHash": {
+      "salt": "676d952e04321987384e8f5a23224269",
+      "hash": "3a59999f2955e4a6a60e43f9d4c61700e182669603b0f557c6df3cbe98e68806ff0ec27e87b1a6d3aeae9a4a602023f2a7c17f4ad058a36c02d09eb597cf2289"
+    },
+    "companyName": "",
+    "industry": "",
+    "note": ""
+  },
+  {
+    "id": 1783911160910,
+    "username": "ocr-test",
+    "email": "ocr-test-fb53fb4f65bd4b6cba4f150485d0bcfa@example.com",
+    "passwordHash": {
+      "salt": "f69fc0b3faa5f1879362088553c16acc",
+      "hash": "61ddaf88ffcc196bdf7f00956ee7c5e406310f44c6df24fff108ccf7d97f3f05792aa14732aae9e5e2bb56a5719349f234feca5759f8a2ad1c8109b6d024bc79"
+    },
+    "companyName": "",
+    "industry": "",
+    "note": ""
+  },
+  {
+    "id": 1783990858901,
+    "username": "learning-test",
+    "email": "learning-test-71666c81021f4d11bef5617b34ac8f9c@example.com",
+    "passwordHash": {
+      "salt": "21407f40db5538910d11dcbfe6a92414",
+      "hash": "f0ef615e14e218e13b090f01f847dcc310e72282f380fe1f510f96a478d5615945fbb0fe94e096e57290f6c15bdba085f405f02d1388db0862bf8006810cc0f6"
+    },
+    "companyName": "",
+    "industry": "",
+    "note": ""
+  },
+  {
+    "id": 1783991795353,
+    "username": "memo-test",
+    "email": "memo-test-5c4433697efe40debc6f3ad11c2fcce8@example.com",
+    "passwordHash": {
+      "salt": "228f7fdd5c2685488e3144c08558542b",
+      "hash": "943135006ad175fe13404379c334b0c0644d35fd9fe237ea5c8c36d11d68ff884f960942f7243fe1bcf332a82a5214fd60977191590d7f35deaeb77561bee6c3"
+    },
+    "schoolName": "",
+    "learningField": "",
+    "memo": ""
+  },
+  {
+    "id": 1783992388925,
+    "username": "fresh-user",
+    "email": "fresh-study-831830f7d6824d8a9e488c2934926dd6@example.com",
+    "passwordHash": {
+      "salt": "42ffee32d61dc9fc7bd2418c223160dc",
+      "hash": "ca9b4070cb8fac7a95f2704d252f40dee6c5ba70851a6dd7052f402defd28116ce1a7b9fae0719a5ade4a364fca8530785ea37ca26a36977ab3a9c28c6052968"
+    },
+    "schoolName": "",
+    "learningGoal": ""
+  }
+]
