@@ -44,6 +44,49 @@ const normalizeNote = (note) => ({
   reviewQuestions: Array.isArray(note.reviewQuestions) ? note.reviewQuestions : []
 });
 
+const importFingerprint = (note) => [note.title, note.content, note.studyDate].join("\u0000");
+const isValidImportedDateTime = (value) => {
+  if (!value) {
+    return null;
+  }
+
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+};
+
+const normalizeImportedNote = (note) => {
+  const source = note && typeof note === "object" ? note : {};
+  const normalized = normalizeNote({
+    title: typeof source.title === "string" ? source.title : "",
+    subject: typeof source.subject === "string" ? source.subject : "",
+    content: typeof source.content === "string" ? source.content : "",
+    studyDate: typeof source.studyDate === "string" ? source.studyDate : "",
+    studyMinutes: source.studyMinutes,
+    understanding: typeof source.understanding === "string" ? source.understanding : "普通",
+    reviewDate: typeof source.reviewDate === "string" ? source.reviewDate : typeof source.nextReviewDate === "string" ? source.nextReviewDate : "",
+    tags: source.tags,
+    memo: typeof source.memo === "string" ? source.memo : "",
+    isLearned: source.isLearned,
+    aiSummary: typeof source.aiSummary === "string" ? source.aiSummary : "",
+    reviewQuestions: Array.isArray(source.reviewQuestions) ? source.reviewQuestions : []
+  });
+
+  return {
+    ...normalized,
+    title: normalized.title.trim().slice(0, 200),
+    subject: normalized.subject.trim().slice(0, 200),
+    content: normalized.content.trim().slice(0, 50000),
+    memo: normalized.memo.slice(0, 20000),
+    aiSummary: normalized.aiSummary.slice(0, 50000),
+    reviewQuestions: normalized.reviewQuestions
+      .map((question) => String(question).trim().slice(0, 1000))
+      .filter(Boolean)
+      .slice(0, 20),
+    createdAt: isValidImportedDateTime(source.createdAt),
+    updatedAt: isValidImportedDateTime(source.updatedAt)
+  };
+};
+
 const publicUser = (user) => ({
   id: user.id,
   username: user.username,
@@ -278,6 +321,7 @@ const getSavedCheckQuestions = (notes) =>
     .flatMap((note) =>
       (note.reviewQuestions || []).map((question, questionIndex) => ({
         id: `${note.id}-${questionIndex + 1}`,
+        noteId: note.id,
         question: String(question).replace(/^Q\d+\.\s*/, ""),
         noteTitle: note.title,
         subject: note.subject
@@ -298,7 +342,10 @@ const makeFallbackCheckEvaluation = (answers) => {
     summary: `10問中${answeredCount}問に回答しました。回答した内容をもう一度メモと比べて確認しましょう。`,
     goodPoints: answeredCount > 0 ? ["自分の言葉で回答しようとしています。"] : [],
     reviewPoints: answeredCount < 10 ? ["未回答の問題を埋めましょう。"] : ["説明が短い問題は、具体例を追加しましょう。"],
-    advice: "間違えた問題や説明しにくかった問題を、もう一度学習メモで確認してください。"
+    advice: "間違えた問題や説明しにくかった問題を、もう一度学習メモで確認してください。",
+    nextSteps: answeredCount < 10
+      ? ["未回答の問題を1問ずつ埋める", "関連する学習メモを開いて内容を確認する"]
+      : ["説明しにくかった問題を1つ選び、具体例を追加して答え直す", "明日もう一度、同じメモの復習問題に取り組む"]
   };
 };
 
@@ -324,7 +371,8 @@ Q${index + 1}. ${item.question}
   "summary":"...",
   "goodPoints":["..."],
   "reviewPoints":["..."],
-  "advice":"..."
+  "advice":"...",
+  "nextSteps":["今日できる具体的な行動1つ", "次回の復習に向けた行動1つ"]
 }
 
 回答:
@@ -345,7 +393,8 @@ ${answerText}
       summary: parsed.summary || "",
       goodPoints: Array.isArray(parsed.goodPoints) ? parsed.goodPoints : [],
       reviewPoints: Array.isArray(parsed.reviewPoints) ? parsed.reviewPoints : [],
-      advice: parsed.advice || ""
+      advice: parsed.advice || "",
+      nextSteps: Array.isArray(parsed.nextSteps) ? parsed.nextSteps.slice(0, 3) : []
     };
   } catch (error) {
     return makeFallbackCheckEvaluation(answers);
@@ -392,7 +441,7 @@ const makeFallbackDailyAdvice = (stats) => {
     return `まだ難しいメモが${stats.difficult}件あります。${titles}今日は新しい内容を増やしすぎず、1つのテーマを自分の言葉で説明する練習をしましょう。`;
   }
 
-  return `学習済みは${stats.learned}件、よく理解したメモは${stats.easy}件です。順調です。今日は1つ新しいメモを追加するか、復習問題で理解度チェックを行いましょう。`;
+  return `復習済みは${stats.learned}件、学習済メモは${stats.easy}件です。順調です。今日は1つ新しいメモを追加するか、復習問題で理解度チェックを行いましょう。`;
 };
 
 const makeGeminiDailyAdvice = async (notes) => {
@@ -892,6 +941,111 @@ app.get("/api/notes", requireAuth, async (req, res) => {
   res.json(result.rows.map(mapNote));
 });
 
+app.get("/api/notes/export", requireAuth, async (req, res) => {
+  const result = await query(
+    "SELECT * FROM notes WHERE user_id = $1 ORDER BY created_at DESC, id DESC",
+    [req.user.id]
+  );
+  const exportData = {
+    format: "learning-memo-ai-notes",
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    notes: result.rows.map(mapNote).map(({ id, userId, ...note }) => note)
+  };
+  const date = getTodayText();
+
+  res.setHeader("Content-Type", "application/json; charset=utf-8");
+  res.setHeader("Content-Disposition", `attachment; filename="learning-memos-${date}.json"`);
+  res.json(exportData);
+});
+
+app.post("/api/notes/import", requireAuth, async (req, res) => {
+  const rawNotes = Array.isArray(req.body?.notes) ? req.body.notes : Array.isArray(req.body) ? req.body : null;
+
+  if (!rawNotes) {
+    return res.status(400).json({ message: "インポートするJSONファイルの形式が正しくありません。" });
+  }
+
+  if (rawNotes.length === 0) {
+    return res.status(400).json({ message: "インポートする学習メモがありません。" });
+  }
+
+  if (rawNotes.length > 500 || Buffer.byteLength(JSON.stringify(req.body), "utf8") > 5 * 1024 * 1024) {
+    return res.status(400).json({ message: "インポートできるのは500件、または5MBまでです。" });
+  }
+
+  const currentNotes = await query(
+    "SELECT title, content, study_date FROM notes WHERE user_id = $1",
+    [req.user.id]
+  );
+  const fingerprints = new Set(currentNotes.rows.map((note) => importFingerprint({
+    title: note.title || "",
+    content: note.content || "",
+    studyDate: note.study_date || ""
+  })));
+  const validNotes = [];
+  let skippedCount = 0;
+
+  rawNotes.forEach((rawNote) => {
+    if (!rawNote || typeof rawNote !== "object") {
+      skippedCount += 1;
+      return;
+    }
+
+    const note = normalizeImportedNote(rawNote);
+
+    if (!note.title || !note.content) {
+      skippedCount += 1;
+      return;
+    }
+
+    const fingerprint = importFingerprint(note);
+
+    if (fingerprints.has(fingerprint)) {
+      skippedCount += 1;
+      return;
+    }
+
+    fingerprints.add(fingerprint);
+    validNotes.push(note);
+  });
+
+  const importedNotes = [];
+
+  for (const note of validNotes) {
+    const result = await query(
+      `INSERT INTO notes
+        (user_id, title, subject, content, study_date, study_minutes, understanding, review_date, tags, memo, is_learned, ai_summary, review_questions, created_at, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9::jsonb, $10, $11, $12, $13::jsonb, COALESCE($14::timestamptz, NOW()), COALESCE($15::timestamptz, NOW()))
+       RETURNING *`,
+      [
+        req.user.id,
+        note.title,
+        note.subject,
+        note.content,
+        note.studyDate,
+        note.studyMinutes,
+        note.understanding,
+        note.reviewDate,
+        JSON.stringify(note.tags),
+        note.memo,
+        note.isLearned,
+        note.aiSummary,
+        JSON.stringify(note.reviewQuestions),
+        note.createdAt,
+        note.updatedAt
+      ]
+    );
+    importedNotes.push(mapNote(result.rows[0]));
+  }
+
+  res.status(201).json({
+    importedCount: importedNotes.length,
+    skippedCount,
+    notes: importedNotes
+  });
+});
+
 app.get("/api/daily-advice", requireAuth, async (req, res) => {
   const adviceDate = getTodayText();
   const existing = await query(
@@ -1196,14 +1350,14 @@ app.post("/api/check/questions", requireAuth, async (req, res) => {
   const checkSourceNotes = result.rows.map(mapNote);
 
   if (checkSourceNotes.length === 0) {
-    return res.status(400).json({ message: "学習済み、またはよく理解したメモがありません。" });
+    return res.status(400).json({ message: "復習済み、または学習済のメモがありません。" });
   }
 
   const questions = getSavedCheckQuestions(checkSourceNotes);
 
   if (questions.length === 0) {
     return res.status(400).json({
-      message: "学習済み、またはよく理解したメモに保存済みの復習問題がありません。詳細情報で復習問題を作成してから実行してください。"
+      message: "復習済み、または学習済のメモに保存済みの復習問題がありません。詳細情報で復習問題を作成してから実行してください。"
     });
   }
 
@@ -1219,7 +1373,17 @@ app.post("/api/check/evaluate", requireAuth, async (req, res) => {
 
   try {
     const evaluation = await makeGeminiCheckEvaluation(answers);
-    res.json(evaluation);
+    const relatedNotes = [...new Map(
+      answers
+        .filter((item) => item.noteId)
+        .map((item) => [String(item.noteId), {
+          id: item.noteId,
+          title: item.noteTitle || "学習メモ",
+          subject: item.subject || ""
+        }])
+    ).values()].slice(0, 5);
+
+    res.json({ ...evaluation, relatedNotes });
   } catch (error) {
     res.status(error.statusCode || 500).json({
       message: "AI理解度チェックの評価を作成できませんでした。APIキーまたは無料枠の上限を確認してください。"

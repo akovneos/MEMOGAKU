@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
@@ -16,6 +16,7 @@ const emptyNote = {
   aiSummary: "",
   reviewQuestions: ""
 };
+const getAiCheckStorageKey = (userId) => `learningMemoAiCheck:${userId}`;
 
 const todayText = new Date().toISOString().slice(0, 10);
 const toLocalDate = (dateText) => {
@@ -102,6 +103,7 @@ const dateOnly = (value) => (value ? String(value).slice(0, 10) : "");
 const getCreatedDate = (note) => dateOnly(note.createdAt);
 const getReviewDate = (note) => dateOnly(note.nextReviewDate || note.reviewDate);
 const getUnderstandingLevel = (note) => note.understandingLevel || note.understanding || "";
+const getUnderstandingLabel = (note) => getUnderstandingLevel(note) === "よく理解した" ? "学習済" : getUnderstandingLevel(note);
 const isDifficultNote = (note) => ["やや難しい", "難しい", "まだ難しい"].includes(getUnderstandingLevel(note));
 const isActiveLearningNote = (note) => !note.isLearned;
 const isAddedTodayNote = (note) => isActiveLearningNote(note) && getCreatedDate(note) === todayText;
@@ -221,6 +223,8 @@ function App() {
   const screen = routeToScreen(currentPath);
   const [profile, setProfile] = useState(emptyProfile);
   const [profileMessage, setProfileMessage] = useState("");
+  const [backupLoading, setBackupLoading] = useState("");
+  const importInputRef = useRef(null);
   const [notes, setNotes] = useState([]);
   const [dailyAdvice, setDailyAdvice] = useState(null);
   const [dailyAdviceLoading, setDailyAdviceLoading] = useState(false);
@@ -228,6 +232,7 @@ function App() {
   const [noteForm, setNoteForm] = useState(emptyNote);
   const [editingId, setEditingId] = useState(null);
   const [selectedNote, setSelectedNote] = useState(null);
+  const [scrollTargetId, setScrollTargetId] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [dashboardSort, setDashboardSort] = useState({ key: "studyDate", direction: "desc" });
@@ -235,6 +240,7 @@ function App() {
   const [selectedCalendarDate, setSelectedCalendarDate] = useState(todayText);
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth >= 768);
   const [statusMessage, setStatusMessage] = useState("");
+  const [statusType, setStatusType] = useState("success");
   const [aiLoading, setAiLoading] = useState("");
   const [aiError, setAiError] = useState("");
   const [learningId, setLearningId] = useState(null);
@@ -243,6 +249,7 @@ function App() {
   const [checkResult, setCheckResult] = useState(null);
   const [checkLoading, setCheckLoading] = useState("");
   const [checkError, setCheckError] = useState("");
+  const [checkStorageLoadedFor, setCheckStorageLoadedFor] = useState("");
   const [imageInput, setImageInput] = useState(null);
   const [imageAiLoading, setImageAiLoading] = useState(false);
   const [imageAiError, setImageAiError] = useState("");
@@ -266,6 +273,11 @@ function App() {
         Authorization: `Bearer ${token}`
       }
     });
+
+  const showStatus = (message, type = "success") => {
+    setStatusMessage(message);
+    setStatusType(type);
+  };
 
   const navigate = (path) => {
     if (window.location.pathname !== path) {
@@ -368,6 +380,75 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (!statusMessage) {
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => setStatusMessage(""), 4500);
+    return () => window.clearTimeout(timeoutId);
+  }, [statusMessage]);
+
+  useEffect(() => {
+    if (screen !== "dashboard" || !scrollTargetId) {
+      return undefined;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const target = document.getElementById(`learning-note-detail-${scrollTargetId}`)
+          || document.getElementById(`learning-note-${scrollTargetId}`);
+
+        target?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+        setScrollTargetId(null);
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, [screen, scrollTargetId, notes, activeFilter]);
+
+  useEffect(() => {
+    const userId = String(user?.id || "");
+
+    if (!userId) {
+      setCheckQuestions([]);
+      setCheckAnswers({});
+      setCheckResult(null);
+      setCheckStorageLoadedFor("");
+      return;
+    }
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(getAiCheckStorageKey(userId)) || "null");
+      setCheckQuestions(Array.isArray(saved?.questions) ? saved.questions : []);
+      setCheckAnswers(saved?.answers && typeof saved.answers === "object" ? saved.answers : {});
+      setCheckResult(saved?.result && typeof saved.result === "object" ? saved.result : null);
+    } catch (error) {
+      setCheckQuestions([]);
+      setCheckAnswers({});
+      setCheckResult(null);
+    } finally {
+      setCheckStorageLoadedFor(userId);
+    }
+  }, [user?.id]);
+
+  useEffect(() => {
+    const userId = String(user?.id || "");
+
+    if (!userId || checkStorageLoadedFor !== userId) {
+      return;
+    }
+
+    localStorage.setItem(getAiCheckStorageKey(userId), JSON.stringify({
+      questions: checkQuestions,
+      answers: checkAnswers,
+      result: checkResult
+    }));
+  }, [user?.id, checkStorageLoadedFor, checkQuestions, checkAnswers, checkResult]);
+
+  useEffect(() => {
     if (currentPath === "/notes/new") {
       setEditingId(null);
       return;
@@ -437,11 +518,11 @@ function App() {
         : activeFilter === "difficult"
           ? "まだ難しい学習メモ"
           : activeFilter === "easy"
-            ? "よく理解した学習メモ"
+            ? "学習済の学習メモ"
             : activeFilter === "normal"
               ? "普通の学習メモ"
               : activeFilter === "learned"
-                ? "学習済みの学習メモ"
+                ? "復習済みの学習メモ"
             : "学習メモ";
   const todayCount = notes.filter(isAddedTodayNote).length;
   const weekDates = getWeekDates(todayText);
@@ -459,6 +540,22 @@ function App() {
   const normalCount = notes.filter((note) => isActiveLearningNote(note) && getUnderstandingLevel(note) === "普通").length;
   const learnedCount = notes.filter((note) => note.isLearned).length;
   const checkSourceCount = learnedCount + easyCount;
+  const todayTasks = useMemo(() => {
+    const tasks = [];
+    const addedIds = new Set();
+    const addTask = (note, label, kind) => {
+      if (!addedIds.has(note.id)) {
+        addedIds.add(note.id);
+        tasks.push({ note, label, kind });
+      }
+    };
+
+    sortByStudyDateDesc(notes.filter(isTodayLearningNote)).forEach((note) => addTask(note, "今日の学習・復習", "today"));
+    sortByStudyDateDesc(notes.filter((note) => isActiveLearningNote(note) && isDifficultNote(note))).forEach((note) => addTask(note, "理解度を深める", "difficult"));
+    sortByStudyDateDesc(notes.filter((note) => isActiveLearningNote(note) && !note.aiSummary?.trim())).forEach((note) => addTask(note, "AIアドバイスを作成", "advice"));
+
+    return tasks.slice(0, 5);
+  }, [notes]);
   const calendarMonthText = calendarMonth.slice(0, 7);
   const calendarDays = getMonthCalendarDays(calendarMonth);
   const calendarMonthLabel = new Intl.DateTimeFormat("ja-JP", { year: "numeric", month: "long" }).format(toLocalDate(calendarMonth));
@@ -595,7 +692,7 @@ function App() {
         memo: data.memo || current.memo
       }));
       setRecognizedText(data.recognizedText || "");
-      setStatusMessage("画像から学習メモを入力しました。内容を確認してください。");
+      showStatus("画像から学習メモを入力しました。内容を確認してください。");
     } catch (error) {
       setImageAiError(error.message || "画像からテキストを認識できませんでした。");
     } finally {
@@ -675,14 +772,14 @@ function App() {
     const data = await response.json();
 
     if (!response.ok) {
-      setStatusMessage(data.message || "保存に失敗しました。");
+      showStatus(data.message || "保存に失敗しました。", "error");
       return;
     }
 
     setNotes((current) =>
       editingId ? current.map((note) => (note.id === editingId ? data : note)) : [data, ...current]
     );
-    setStatusMessage(editingId ? "学習メモを更新しました。" : "学習メモを登録しました。");
+    showStatus(editingId ? "学習メモを更新しました。" : "学習メモを登録しました。");
     setNoteForm(emptyNote);
     setEditingId(null);
     navigate("/dashboard");
@@ -696,19 +793,19 @@ function App() {
     const response = await request(`/notes/${note.id}`, { method: "DELETE" });
 
     if (!response.ok) {
-      setStatusMessage("削除に失敗しました。");
+      showStatus("削除に失敗しました。", "error");
       return;
     }
 
     setNotes((current) => current.filter((item) => item.id !== note.id));
     setSelectedNote(null);
-    setStatusMessage("学習メモを削除しました。");
+    showStatus("学習メモを削除しました。");
   };
 
   const toggleNoteLearned = async (note) => {
     const confirmMessage = note.isLearned
-      ? "学習済みを解除しますか？"
-      : "このメモを学習済みにしますか？";
+      ? "復習済みを解除しますか？"
+      : "このメモを復習済みにしますか？";
 
     if (!window.confirm(confirmMessage)) {
       return;
@@ -726,15 +823,15 @@ function App() {
       const data = await response.json();
 
       if (!response.ok) {
-        setStatusMessage(data.message || "学習済みを更新できませんでした。");
+        showStatus(data.message || "復習済みを更新できませんでした。", "error");
         return;
       }
 
       setNotes((current) => current.map((item) => (item.id === data.id ? data : item)));
       setSelectedNote(data);
-      setStatusMessage(data.isLearned ? "学習済みにしました。" : "学習済みを解除しました。");
+      showStatus(data.isLearned ? "復習済みにしました。" : "復習済みを解除しました。");
     } catch (error) {
-      setStatusMessage("学習済みを更新できませんでした。");
+      showStatus("復習済みを更新できませんでした。", "error");
     } finally {
       setLearningId(null);
     }
@@ -757,6 +854,7 @@ function App() {
       const questions = Array.isArray(data.questions) ? data.questions.slice(0, 10) : [];
       setCheckQuestions(questions);
       setCheckAnswers({});
+      showStatus(`${questions.length}問の復習問題を読み込みました。`);
     } catch (error) {
       setCheckError("AI理解度チェックを作成できませんでした。");
     } finally {
@@ -797,6 +895,7 @@ function App() {
       }
 
       setCheckResult(data);
+      showStatus("AIが理解度チェックの評価を作成しました。");
     } catch (error) {
       setCheckError("AI評価を作成できませんでした。");
     } finally {
@@ -875,6 +974,7 @@ function App() {
 
       setNotes((current) => current.map((note) => (note.id === data.id ? data : note)));
       setSelectedNote(data);
+      showStatus(type === "summary" ? "AI要約・学習アドバイスを保存しました。" : "復習問題を保存しました。");
     } catch (error) {
       setAiError("AI処理に失敗しました。");
     } finally {
@@ -885,6 +985,20 @@ function App() {
   const updateProfile = (event) => {
     const { name, value } = event.target;
     setProfile((current) => ({ ...current, [name]: value }));
+  };
+
+  const openNoteFromCheck = (noteId) => {
+    const note = notes.find((item) => String(item.id) === String(noteId));
+
+    if (!note) {
+      return;
+    }
+
+    setKeyword("");
+    setActiveFilter("all");
+    setSelectedNote(note);
+    setScrollTargetId(String(note.id));
+    navigate("/dashboard");
   };
 
   const submitProfile = async (event) => {
@@ -908,6 +1022,84 @@ function App() {
     setProfileMessage("プロフィールを保存しました。");
   };
 
+  const exportNotes = async () => {
+    setBackupLoading("export");
+
+    try {
+      const response = await request("/notes/export");
+
+      if (!response.ok) {
+        const data = await response.json();
+        showStatus(data.message || "学習メモをエクスポートできませんでした。", "error");
+        return;
+      }
+
+      const exportFile = await response.blob();
+      const downloadUrl = URL.createObjectURL(exportFile);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = `learning-memos-${todayText}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(downloadUrl);
+      showStatus("学習メモのバックアップをダウンロードしました。");
+    } catch (error) {
+      showStatus("学習メモをエクスポートできませんでした。", "error");
+    } finally {
+      setBackupLoading("");
+    }
+  };
+
+  const importNotes = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+
+    if (!file) {
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      showStatus("インポートできるファイルは5MBまでです。", "error");
+      return;
+    }
+
+    setBackupLoading("import");
+
+    try {
+      const parsed = JSON.parse(await file.text());
+      const notesToImport = Array.isArray(parsed) ? parsed : parsed?.notes;
+
+      if (!Array.isArray(notesToImport)) {
+        showStatus("学習メモのJSONファイルを選択してください。", "error");
+        return;
+      }
+
+      if (!window.confirm(`${notesToImport.length}件の学習メモを追加します。既存のメモは削除されません。よろしいですか？`)) {
+        return;
+      }
+
+      const response = await request("/notes/import", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notes: notesToImport })
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        showStatus(data.message || "学習メモをインポートできませんでした。", "error");
+        return;
+      }
+
+      await loadNotes();
+      showStatus(`${data.importedCount}件の学習メモをインポートしました。${data.skippedCount ? ` ${data.skippedCount}件は重複または形式不正のため追加しませんでした。` : ""}`);
+    } catch (error) {
+      showStatus("JSONファイルを読み込めませんでした。", "error");
+    } finally {
+      setBackupLoading("");
+    }
+  };
+
   const renderDetailPanel = () => {
     if (!selectedNote) {
       return null;
@@ -916,7 +1108,7 @@ function App() {
     const summaryAdvice = splitSummaryAdvice(selectedNote.aiSummary);
 
     return (
-      <section className="detailPanel expandableDetail">
+      <section className="detailPanel expandableDetail" id={`learning-note-detail-${selectedNote.id}`}>
         <div className="detailHeader">
           <div>
             <span className="detailLabel">▼ 詳細情報</span>
@@ -928,12 +1120,12 @@ function App() {
           <div><dt>タイトル</dt><dd>{selectedNote.title || "未登録"}</dd></div>
           <div><dt>科目</dt><dd>{selectedNote.subject || "未登録"}</dd></div>
           <div><dt>内容</dt><dd>{selectedNote.content || "未登録"}</dd></div>
-          <div><dt>理解度</dt><dd>{getUnderstandingLevel(selectedNote) || "未登録"}</dd></div>
+          <div><dt>理解度</dt><dd>{getUnderstandingLabel(selectedNote) || "未登録"}</dd></div>
           <div><dt>学習日</dt><dd>{selectedNote.studyDate || "未登録"}</dd></div>
           <div><dt>学習時間</dt><dd>{getStudyMinutes(selectedNote) ? formatStudyMinutes(getStudyMinutes(selectedNote)) : "未登録"}</dd></div>
           <div><dt>次回復習日</dt><dd>{getReviewDate(selectedNote) || "未登録"}</dd></div>
           <div><dt>メモ</dt><dd>{selectedNote.memo || "未登録"}</dd></div>
-          <div><dt>学習状態</dt><dd>{selectedNote.isLearned ? "学習済み" : "未完了"}</dd></div>
+          <div><dt>学習状態</dt><dd>{selectedNote.isLearned ? "復習済み" : "未完了"}</dd></div>
           <div><dt>作成日</dt><dd>{formatDateTime(selectedNote.createdAt)}</dd></div>
         </dl>
         <div className="detailActions">
@@ -952,8 +1144,8 @@ function App() {
             {learningId === selectedNote.id
               ? "更新中..."
               : selectedNote.isLearned
-                ? "学習済みを解除"
-                : "学習済みにする"}
+                ? "復習済みを解除"
+                : "復習済みにする"}
           </button>
           <button className="editButton" type="button" onClick={() => editNote(selectedNote)}>編集する</button>
           <button className="deleteButton" type="button" onClick={() => deleteNote(selectedNote)}>削除する</button>
@@ -1089,10 +1281,18 @@ function App() {
             {screen === "profile" && "プロフィール"}
           </h1>
           <div className="headerTools">
-            <input value={keyword} onChange={(event) => setKeyword(event.target.value)} placeholder="検索（タイトル・科目・内容・メモ）" />
+            {screen === "dashboard" && (
+              <input value={keyword} onChange={(event) => setKeyword(event.target.value)} placeholder="検索（タイトル・科目・内容・メモ）" />
+            )}
             <button className="logoutButton" type="button" onClick={logout}>ログアウト</button>
           </div>
         </header>
+
+        {statusMessage && (
+          <p className={`appNotice ${statusType === "error" ? "error" : "success"}`} role="status">
+            {statusMessage}
+          </p>
+        )}
 
         {screen === "profile" && (
           <section className="profilePanel">
@@ -1113,6 +1313,19 @@ function App() {
               <button type="submit">保存する</button>
               {profileMessage && <p className="successText">{profileMessage}</p>}
             </form>
+            <section className="backupPanel">
+              <h3>学習メモのバックアップ</h3>
+              <p>JSONファイルとして学習メモを保存・復元できます。既存のメモは削除されません。</p>
+              <div className="formActions">
+                <button type="button" onClick={exportNotes} disabled={Boolean(backupLoading)}>
+                  {backupLoading === "export" ? "エクスポート中..." : "エクスポート"}
+                </button>
+                <button className="secondaryButton" type="button" onClick={() => importInputRef.current?.click()} disabled={Boolean(backupLoading)}>
+                  {backupLoading === "import" ? "インポート中..." : "インポート"}
+                </button>
+                <input ref={importInputRef} className="hiddenFileInput" type="file" accept="application/json,.json" onChange={importNotes} />
+              </div>
+            </section>
           </section>
         )}
 
@@ -1154,7 +1367,7 @@ function App() {
               </div>
               <div className="formColumns">
                 <label>理解度<select name="understanding" value={noteForm.understanding} onChange={updateNoteForm}>
-                  <option value="よく理解した">よく理解した</option>
+                  <option value="よく理解した">学習済</option>
                   <option value="普通">普通</option>
                   <option value="まだ難しい">まだ難しい</option>
                 </select></label>
@@ -1173,7 +1386,6 @@ function App() {
                 <button type="submit">{editingId ? "更新する" : "登録する"}</button>
                 <button className="secondaryButton" type="button" onClick={() => navigate("/dashboard")}>戻る</button>
               </div>
-              {statusMessage && <p className="successText">{statusMessage}</p>}
             </form>
           </section>
         )}
@@ -1184,13 +1396,16 @@ function App() {
               <h2>AI理解度チェック</h2>
               <span className="summaryPill">対象 {checkSourceCount}件</span>
             </div>
-            <p className="panelLead">学習済み、またはよく理解したメモの詳細情報に保存されている復習問題から10問を表示し、回答後にAIが理解度を評価します。</p>
+            <p className="panelLead">復習済み、または学習済のメモの詳細情報に保存されている復習問題から10問を表示し、回答後にAIが理解度を評価します。</p>
 
             <div className="checkStartBox">
-              <button type="button" onClick={startAiCheck} disabled={checkLoading === "questions" || checkSourceCount === 0}>
-                {checkLoading === "questions" ? "問題読み込み中..." : "保存済みの復習問題でチェック開始"}
-              </button>
-              {checkSourceCount === 0 && <p className="emptyMini">AI理解度チェックには、学習済み、またはよく理解したメモが必要です。</p>}
+              {checkQuestions.length === 0 && (
+                <button type="button" onClick={startAiCheck} disabled={checkLoading === "questions" || checkSourceCount === 0}>
+                  {checkLoading === "questions" ? "問題読み込み中..." : "保存済みの復習問題でチェック開始"}
+                </button>
+              )}
+              {checkQuestions.length > 0 && <p className="emptyMini">問題と回答は、このブラウザで保存されています。</p>}
+              {checkSourceCount === 0 && <p className="emptyMini">AI理解度チェックには、復習済み、または学習済のメモが必要です。</p>}
             </div>
 
             {checkError && <p className="errorText">{checkError}</p>}
@@ -1206,7 +1421,7 @@ function App() {
                   <article className="checkQuestionCard" key={question.id}>
                     <div className="checkQuestionHeader">
                       <strong>Q{index + 1}</strong>
-                      <span>{question.subject || "学習メモ"} / {question.noteTitle || "学習済み"}</span>
+                      <span>{question.subject || "学習メモ"} / {question.noteTitle || "復習済み"}</span>
                     </div>
                     <p>{question.question}</p>
                     <textarea
@@ -1246,6 +1461,21 @@ function App() {
                   )}
                   <h3>次にやること</h3>
                   <p>{checkResult.advice}</p>
+                  {checkResult.nextSteps?.length > 0 && (
+                    <ul className="checkNextSteps">{checkResult.nextSteps.map((item) => <li key={item}>{item}</li>)}</ul>
+                  )}
+                  {checkResult.relatedNotes?.length > 0 && (
+                    <div className="checkRelatedNotes">
+                      <h3>復習に使った学習メモ</h3>
+                      <div>
+                        {checkResult.relatedNotes.map((note) => (
+                          <button className="secondaryButton" type="button" key={note.id} onClick={() => openNoteFromCheck(note.id)}>
+                            {note.title || "学習メモ"}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </section>
             )}
@@ -1265,7 +1495,7 @@ function App() {
               </article>
               <article className="calendarHeroCard green">
                 <div className="calendarHeroIcon"><AppIcon name="check" /></div>
-                <div><span>学習済み</span><strong>{calendarLearnedCount}件</strong></div>
+                <div><span>復習済み</span><strong>{calendarLearnedCount}件</strong></div>
               </article>
               <article className="calendarHeroCard blue">
                 <div className="calendarHeroIcon"><AppIcon name="report" /></div>
@@ -1362,6 +1592,29 @@ function App() {
               </div>
             </section>
 
+            <section className="todayTasksCard">
+              <div className="todayTasksHeader">
+                <div>
+                  <h2>今日やること</h2>
+                  <p>今日の学習・復習と、理解を深めたいメモを優先して表示しています。</p>
+                </div>
+                <span>{todayTasks.length}件</span>
+              </div>
+              {todayTasks.length === 0 ? (
+                <p className="emptyMini">今日の優先メモはありません。新しい学習メモを追加してみましょう。</p>
+              ) : (
+                <div className="todayTaskList">
+                  {todayTasks.map(({ note, label, kind }) => (
+                    <button className="todayTask" type="button" key={note.id} onClick={() => openNoteFromCheck(note.id)}>
+                      <span className={`todayTaskIcon ${kind}`}><AppIcon name={kind === "difficult" ? "brain" : kind === "advice" ? "spark" : "calendar"} /></span>
+                      <span className="todayTaskText"><strong>{note.title}</strong><small>{note.subject || "科目未登録"}</small></span>
+                      <span className={`todayTaskLabel ${kind}`}>{label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </section>
+
             <section className="metricGrid">
               <button
                 className={`metricCard blue ${activeFilter === "today" ? "active" : ""}`}
@@ -1405,7 +1658,7 @@ function App() {
                 onClick={() => setActiveFilter((current) => (current === "easy" ? "all" : "easy"))}
               >
                 <div className="metricIcon"><AppIcon name="check" /></div>
-                <p>よく理解した</p>
+                <p>学習済</p>
                 <strong>{easyCount}件</strong>
               </button>
               <button
@@ -1414,7 +1667,7 @@ function App() {
                 onClick={() => setActiveFilter((current) => (current === "learned" ? "all" : "learned"))}
               >
                 <div className="metricIcon"><AppIcon name="app" /></div>
-                <p>学習済み</p>
+                <p>復習済み</p>
                 <strong>{learnedCount}件</strong>
               </button>
             </section>
@@ -1449,11 +1702,11 @@ function App() {
                   </div>
                   {dashboardNotes.map((note) => (
                     <React.Fragment key={note.id}>
-                      <div className="memoTableRow">
+                      <div className="memoTableRow" id={`learning-note-${note.id}`}>
                         <strong>{note.title}</strong>
                         <span>{note.subject}</span>
                         <span className={`levelBadge ${isDifficultNote(note) ? "hard" : getUnderstandingLevel(note) === "よく理解した" ? "easy" : "normal"}`}>
-                          {getUnderstandingLevel(note)}
+                          {getUnderstandingLabel(note)}
                         </span>
                         <span>{note.studyDate || "未登録"}</span>
                         <span>{getReviewDate(note) || "未登録"}</span>
