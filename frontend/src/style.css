@@ -1273,13 +1273,34 @@ p {
 }
 
 .learnedButton {
-  color: #075985;
-  background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+  color: #ffffff;
   box-shadow: none;
 }
 
-.learnedButton:hover:not(:disabled) {
-  background: linear-gradient(135deg, #bae6fd 0%, #bfdbfe 100%);
+.learnedButton.markLearned {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.learnedButton.markLearned:hover:not(:disabled) {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+.learnedButton.unlearn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.learnedButton.unlearn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.editButton {
+  color: #ffffff;
+  background: #f59e0b;
+  box-shadow: none;
+}
+
+.editButton:hover:not(:disabled) {
+  background: #d97706;
 }
 
 .studyChatWidget {

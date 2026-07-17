@@ -706,6 +706,14 @@ function App() {
   };
 
   const toggleNoteLearned = async (note) => {
+    const confirmMessage = note.isLearned
+      ? "学習済みを解除しますか？"
+      : "このメモを学習済みにしますか？";
+
+    if (!window.confirm(confirmMessage)) {
+      return;
+    }
+
     setLearningId(note.id);
     setStatusMessage("");
 
@@ -935,14 +943,19 @@ function App() {
           <button className="purpleButton" type="button" onClick={() => runAi("questions")} disabled={aiLoading === "questions"}>
             {aiLoading === "questions" ? "作成中..." : "復習問題を作成する"}
           </button>
-          <button className="learnedButton" type="button" onClick={() => toggleNoteLearned(selectedNote)} disabled={learningId === selectedNote.id}>
+          <button
+            className={`learnedButton ${selectedNote.isLearned ? "unlearn" : "markLearned"}`}
+            type="button"
+            onClick={() => toggleNoteLearned(selectedNote)}
+            disabled={learningId === selectedNote.id}
+          >
             {learningId === selectedNote.id
               ? "更新中..."
               : selectedNote.isLearned
                 ? "学習済みを解除"
                 : "学習済みにする"}
           </button>
-          <button className="secondaryButton" type="button" onClick={() => editNote(selectedNote)}>編集する</button>
+          <button className="editButton" type="button" onClick={() => editNote(selectedNote)}>編集する</button>
           <button className="deleteButton" type="button" onClick={() => deleteNote(selectedNote)}>削除する</button>
         </div>
         {aiError && <p className="errorText">{aiError}</p>}
