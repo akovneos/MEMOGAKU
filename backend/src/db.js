@@ -2,14 +2,19 @@ import "dotenv/config";
 import pg from "pg";
 
 const { Pool } = pg;
-const connectionString = process.env.DATABASE_URL || "";
-const isSupabaseConnection = connectionString.includes("supabase.com");
+const rawConnectionString = process.env.DATABASE_URL || "";
+const isSupabaseConnection = rawConnectionString.includes("supabase.com");
+const connectionString = isSupabaseConnection
+  ? rawConnectionString.replace(/([?&])sslmode=[^&]*&?/, (_, separator) => (separator === "?" ? "?" : ""))
+    .replace(/[?&]$/, "")
+  : rawConnectionString;
 
 const pool = new Pool(
   connectionString
     ? {
         connectionString,
         // Supabase pooler uses a certificate chain that Node.js may not include by default.
+        // sslmode in the URL is removed above because it overrides this pg setting.
         ssl: isSupabaseConnection ? { rejectUnauthorized: false } : undefined
       }
     : {
