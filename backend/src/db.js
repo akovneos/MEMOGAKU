@@ -2,10 +2,16 @@ import "dotenv/config";
 import pg from "pg";
 
 const { Pool } = pg;
+const connectionString = process.env.DATABASE_URL || "";
+const isSupabaseConnection = connectionString.includes("supabase.com");
 
 const pool = new Pool(
-  process.env.DATABASE_URL
-    ? { connectionString: process.env.DATABASE_URL }
+  connectionString
+    ? {
+        connectionString,
+        // Supabase pooler uses a certificate chain that Node.js may not include by default.
+        ssl: isSupabaseConnection ? { rejectUnauthorized: false } : undefined
+      }
     : {
         host: process.env.DB_HOST || "localhost",
         port: Number(process.env.DB_PORT || 5432),
